@@ -1,0 +1,39 @@
+<% if (typeof(warnings) != 'undefined') { %>
+    <% warnings.forEach(warning => { %>
+    <div class="warning">
+        <p><%= warning.msg %></p>
+    </div>
+    <% }) %>
+<% } %>
+
+<% if (typeof(errors) != 'undefined') { %>
+    <% errors.forEach(error => { %>
+    <div class="error">
+        <p><%= error.msg %></p>
+    </div>
+    <% }) %>
+<% } %>
+
+<% if (success_msg != '') { %>
+    <div class="success">
+        <p><%= success_msg %></p>
+    </div>
+<% } %>
+
+<% if (error_msg != '') { %>
+    <div class="error">
+        <p><%= error_msg %></p>
+    </div>
+<% } %>
+
+<% if (error != '') { %>
+    <div class="error">
+        <p><%= error %></p>
+    </div>
+<% } %>
+
+<% if (success != '') { %>
+    <div class="success">
+        <p><%= success %></p>
+    </div>
+<% } %>
