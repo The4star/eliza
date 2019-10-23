@@ -235,7 +235,9 @@ form.item {
 button[name="listTitle"] {
   min-height: 30px;
   width: 50px;
+  width: -moz-max-content;
   width: -webkit-max-content;
+  width: -o-max-content;
   margin: 5px;
   border-radius: 5%;
   border-color: transparent;
