@@ -214,8 +214,8 @@ p {
   width: 90%;
   height: 50%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(auto-fit, 94px);
+  grid-template-columns: repeat(auto-fit, minmax(33%, 100px));
+  grid-template-rows: repeat(auto-fit, minmax(33%, 100px));
   gap: 5px;
 }
 
@@ -301,10 +301,5 @@ footer {
   .button {
     font-size: 22px; 
   }
-  .list-section {
-    grid-template-columns: repeat(auto-fit, 1fr);
-    grid-template-rows: repeat(auto-fit, 94px);
-    gap: 5px;
-  };
 
 }
