@@ -214,8 +214,9 @@ p {
   width: 90%;
   height: 50%;
   display: grid;
+  display: -webkit-grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(auto-fit, minmax(94px, 94px));
+  grid-template-rows: repeat(auto-fit, minmax(94px, 94px)) -webkit-max-content;
   gap: 5px;
 }
 
