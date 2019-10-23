@@ -15,7 +15,7 @@ const List = mongoose.model('List', listSchema);
 const Item = mongoose.model('Item', itemSchema); 
 
 const item1 = new Item ({
-    name: 'Welcome to your ToDo list'
+    name: 'Welcome to your new Eliza list'
 });
 
 const item2 = new Item ({
@@ -23,7 +23,7 @@ const item2 = new Item ({
 });
 
 const item3 = new Item ({
-    name: '<-- Click this to delete an item'
+    name: '<<< Click this to delete an item'
 });
 
 const itemArray = [item1, item2, item3];

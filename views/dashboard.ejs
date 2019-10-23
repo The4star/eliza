@@ -1,7 +1,34 @@
 <%-include("header"); -%> 
+<% include ./logo %>
 <div class="auth-box">
     <% include ./partials/alerts %>
+    <h2>Welcome <%= userName %></h2>
+    <button class="button create-list">Create List</button>
+        <form class="list-name-creator" >
+            <input type="text" class="name-field" placeholder="Type the name of your list here" name="name-of-list" id="name-of-list" >
+            <button type="submit" class="button">+</button>
+        </form>
+    <% if (lists.length === 0) { %>
+        <p>Click the Create list button to start organising your life!</p>
+    <% } else {%>
+        <h2>Your Lists</h2>
+        <div class="list-section">
+            <% lists.forEach(list => { %>
+                <div class="list">
+                    <form action="/dashboard/delete-list" method="post">
+                        <p><a href="/dashboard/<%= list.name %>">
+                        <%= list.name %></a></p>
+                        <button class="delete-button" name="listName" value ="<%= list.name %>" >X</button>
+                    </form>
+                </div>
+            <% }); %>
+        </div>
+    <% } %>
+    
     <p><a href="/logout">logout</a></p>
+
 </div>
+
+<script src="./javascripts/script.js"></script>
 
 <%-include("footer"); -%> 
