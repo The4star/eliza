@@ -5,28 +5,34 @@ const {ensureAuthenticated} = require('../config/auth')
 router.use(express.static("public"));
 
 router.get('/', ensureAuthenticated, (req, res) => {
-    res.render('dashboard', {user: req.user})
+    console.log(req.user)
+    user = req.user;
+    lists = user.lists.populate()
+    res.render('dashboard', {user, lists})
 })
 
-router.get('/:customList',  ensureAuthenticated, (req, res) => {
+router.get('/:customList',  ensureAuthenticated, async (req, res) => {
 
     try {
         const customList = req.params.customList.charAt(0).toUpperCase() + req.params.customList.slice(1).toLowerCase();
+        const user = req.user;
 
-        List.findOne({name: customList}, (err, foundList) => {
+        await List.findOne({name: customList, userId: user._id}, async (err, foundList) => {
+            
+            if (err) {
+                throw err
+            };
+
             if (!foundList) {
-                const list =  List.create({
+                const list = await List.create({
                     name: customList,
-                    items: itemArray
+                    items: itemArray,
+                    userId: user._id 
                 });
-                res.redirect(`/dashboard/${customList}`)
+                user.lists.push(list);
+                user.save();
+                res.redirect(`/dashboard/${customList}`);
             } else {
-                if (foundList.items.length === 0) {
-                    itemArray.forEach(item => {
-                        foundList.items.push(item)
-                    })
-                    foundList.save()
-                };
                 res.render("list", {listTitle: customList, items: foundList.items});
             };
         });        
@@ -35,16 +41,18 @@ router.get('/:customList',  ensureAuthenticated, (req, res) => {
     }
 });
 
-router.post('/listupdate', (req, res) => {
+router.post('/listupdate', async (req, res) => {
 
     try {
         const itemName = req.body.newItem;
         const listTitle = req.body.listTitle;
-        
+        const user = req.user;
+
         const newItem = new Item ({
             name: itemName
         });
-        List.findOne({name:listTitle}, (err, foundList) => {
+
+       await List.findOne({name:listTitle, userId: user._id},(err, foundList) => {
             foundList.items.push(newItem);
             foundList.save();
         });
@@ -54,17 +62,17 @@ router.post('/listupdate', (req, res) => {
     };
 });
 
-router.post('/delete', (req, res) => {
+router.post('/delete', async (req, res) => {
     try {
         const itemId = req.body.checkbox;
         const listTitle = req.body.listTitle;
+        const user = req.user;
 
-        List.findOneAndUpdate({name: listTitle}, {$pull: {items: {_id: itemId}}}, (err, foundList) =>{
+        await List.findOneAndUpdate({name: listTitle, userId: user._id}, {$pull: {items: {_id: itemId}}}, (err, foundList) =>{
             if (!err) {
                 res.redirect(`/dashboard/${listTitle}`)
             };
         });
-     
     } catch (error) {
         console.log(error);
     };

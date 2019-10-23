@@ -12,14 +12,13 @@ router.get('/', (req, res) => {
         res.redirect('/dashboard');
     }else {
         res.render('index')
-    }
-   
-})
+    };
+});
 
 router.get('/login', (req, res) => {
     if (req.isAuthenticated()) {
         res.redirect('/dashboard');
-    }else {
+    } else {
         res.render('login');
     }
 })
@@ -71,6 +70,7 @@ router.post('/register', async (req, res) => {
                 firstName,
                 lastName,
                 email,
+                lists: [],
                 password
             })
 

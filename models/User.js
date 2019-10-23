@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+const {Item, List, ItemArray, listSchema, itemSchema} = require('./Item')
 
 const userSchema = new Schema({
     firstName: {type: String, required: [true, 'required field']}, 
