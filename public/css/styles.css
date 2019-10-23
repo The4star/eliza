@@ -302,5 +302,8 @@ footer {
     font-size: 22px;
     
   }
+  button[name="listTitle"] {
+    width: 40px;
+  }
 
 }
