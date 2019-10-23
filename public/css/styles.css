@@ -214,10 +214,8 @@ p {
   width: 90%;
   height: 50%;
   display: grid;
-  display: -webkit-grid;  -webkit-grid-columns: repeat(3, 1fr);
-  -webkit-grid-rows: repeat(auto-fit, 94px);
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(auto-fit, 94px);
+  grid-template-rows: repeat(auto, 94px);
   gap: 5px;
 }
 
