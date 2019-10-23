@@ -215,7 +215,7 @@ p {
   height: 50%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(auto-fit, 94px);
+  grid-template-rows: repeat(100, 94px);
   gap: 5px;
 }
 
