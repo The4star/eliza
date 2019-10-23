@@ -1,14 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const {Item, List, itemArray} = require('../models/Item');
+const User = require('../models/User')
 const {ensureAuthenticated} = require('../config/auth')
 router.use(express.static("public"));
 
-router.get('/', ensureAuthenticated, (req, res) => {
-    console.log(req.user)
-    user = req.user;
-    lists = user.lists.populate()
-    res.render('dashboard', {user, lists})
+router.get('/', ensureAuthenticated, async (req, res) => {
+    
+    const user = await User.findById(req.user._id).populate('lists');
+    const userName = user.firstName;
+    const lists = user.lists;
+
+    res.render('dashboard', {userName, lists})
 })
 
 router.get('/:customList',  ensureAuthenticated, async (req, res) => {
@@ -73,6 +76,22 @@ router.post('/delete', async (req, res) => {
                 res.redirect(`/dashboard/${listTitle}`)
             };
         });
+    } catch (error) {
+        console.log(error);
+    };
+});
+
+router.post('/delete-list', async (req, res) => {
+    try {
+        const listName = req.body.listName;
+        const user = await User.findById(req.user._id)
+        list = await List.findOne({name: listName})
+
+        await User.findOneAndUpdate({firstName:user.firstName}, {$pull: {lists: list._id}});
+
+        await List.deleteOne({name: list.name, userId: user._id})
+
+        res.redirect('/dashboard')
     } catch (error) {
         console.log(error);
     };
