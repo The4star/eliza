@@ -234,7 +234,7 @@ form.item {
 
 button[name="listTitle"] {
   min-height: 30px;
-  width: 50px;
+  max-width: 50px;
   width: -moz-max-content;
   width: -webkit-max-content;
   width: -o-max-content;
@@ -301,9 +301,6 @@ footer {
   .button {
     font-size: 22px;
     
-  }
-  button[name="listTitle"] {
-    width: 30px;
   }
 
 }
