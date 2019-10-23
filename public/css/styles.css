@@ -299,8 +299,12 @@ footer {
   }
 
   .button {
-    font-size: 22px;
-    
+    font-size: 22px; 
   }
+  .list-section {
+    grid-template-columns: repeat(auto-fit, 1fr);
+    grid-template-rows: repeat(auto-fit, 94px);
+    gap: 5px;
+  };
 
 }
