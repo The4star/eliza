@@ -215,7 +215,7 @@ p {
   height: 50%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(33%, 100px));
-  grid-template-rows: repeat(auto-fit, minmax(33%, 100px));
+  grid-template-rows: repeat(auto-fit, minmax(33%, 120px));
   gap: 5px;
 }
 
